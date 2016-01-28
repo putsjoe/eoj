@@ -5,7 +5,12 @@ import (
 	"fmt"
 	"net"
 	"strings"
+	"unicode/utf8"
 )
+
+func length(a string) int {
+	return utf8.RuneCountInString(a)
+}
 
 func main() {
 	var prt string = ":1234"
@@ -18,6 +23,8 @@ func main() {
 	for {
 		msg, _ := bufio.NewReader(conn).ReadString('\n')
 		
+		fmt.Println("Length - ", length(msg))
+			
 		if msg != "\n" {
 			fmt.Print("Received: ", string(msg))
 
