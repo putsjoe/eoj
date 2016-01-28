@@ -9,6 +9,7 @@ import (
 )
 
 func length(a string) int {
+	a = strings.Replace(a, "\n", "", -1)
 	return utf8.RuneCountInString(a)
 }
 
@@ -22,9 +23,9 @@ func main() {
 
 	for {
 		msg, _ := bufio.NewReader(conn).ReadString('\n')
-		
+
 		fmt.Println("Length - ", length(msg))
-			
+
 		if msg != "\n" {
 			fmt.Print("Received: ", string(msg))
 
