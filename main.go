@@ -24,17 +24,20 @@ func main() {
 	for {
 		msg, _ := bufio.NewReader(conn).ReadString('\n')
 
-		fmt.Println("Length - ", length(msg))
+		var leng int = length(msg)
+		//fmt.Println("Length - ", length(msg))
 
-		if msg != "\n" {
+		if leng > 8 {
 			fmt.Print("Received: ", string(msg))
 
 			newmsg := strings.ToUpper(msg)
 			conn.Write([]byte(newmsg + "\n"))
 
 			msg = ""
+		} else if leng < 9 && msg != "\n" {
+			fmt.Println("ERROR_LENGTH")
 		} else {
-			fmt.Println("Empty")
+			fmt.Println("ERROR_EMPTY")
 		}
 	}
 
