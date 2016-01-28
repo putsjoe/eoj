@@ -17,12 +17,17 @@ func main() {
 
 	for {
 		msg, _ := bufio.NewReader(conn).ReadString('\n')
-		fmt.Print("Received: ", string(msg))
+		
+		if msg != "\n" {
+			fmt.Print("Received: ", string(msg))
 
-		newmsg := strings.ToUpper(msg)
-		conn.Write([]byte(newmsg + "\n"))
+			newmsg := strings.ToUpper(msg)
+			conn.Write([]byte(newmsg + "\n"))
 
-		msg = ""
+			msg = ""
+		} else {
+			fmt.Println("Empty")
+		}
 	}
 
 }
