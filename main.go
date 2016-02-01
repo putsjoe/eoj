@@ -4,6 +4,8 @@ import (
 	"bufio"
 	"fmt"
 	"net"
+	"os"
+	//_ "reflect"
 	"strings"
 	"unicode/utf8"
 )
@@ -29,11 +31,26 @@ func main() {
 		// Handle Error
 	}
 
+	var err_c []int
+
 	for {
 		msg, _ := bufio.NewReader(conn).ReadString('\n')
-
 		var leng int = length(msg)
 		//fmt.Println("Length - ", length(msg))
+		//fmt.Print(reflect.TypeOf(msg))
+		fmt.Print(msg)
+		var bing bool = msg == "close"
+
+		fmt.Println(bing)
+
+		if msg == "close" {
+			fmt.Println("Close connection")
+			conn.Close()
+		}
+
+		if msg == "what" {
+			fmt.Println(string(len(err_c)))
+		}
 
 		if leng > 8 {
 			fmt.Print("Received: ", string(msg))
@@ -42,8 +59,16 @@ func main() {
 			conn.Write([]byte(newmsg + "\n"))
 
 			msg = ""
+
 		} else if leng < 9 && msg != "\n" {
 			fmt.Println("ERROR_LENGTH")
+			_ = append(err_c, 1)
+
+			if len(err_c) > 2 {
+				conn.Close()
+				os.Exit(2)
+			}
+
 		} else {
 			fmt.Println("ERROR_EMPTY")
 		}
