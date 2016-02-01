@@ -17,9 +17,17 @@ func main() {
 	var prt string = ":1234"
 	fmt.Println("Listening on port ", prt)
 
-	ln, _ := net.Listen("tcp", prt)
+	ln, err := net.Listen("tcp", prt)
+	if err != nil {
+		panic(err)
+	}
 
-	conn, _ := ln.Accept()
+	// Accept connection
+	conn, err := ln.Accept()
+	if err != nil {
+		conn.Close()
+		// Handle Error
+	}
 
 	for {
 		msg, _ := bufio.NewReader(conn).ReadString('\n')
