@@ -15,6 +15,11 @@ func length(a string) int {
 	return utf8.RuneCountInString(a)
 }
 
+func err_count(slice []string) []string {
+	slice = append(slice, "a")
+	return slice
+}
+
 func main() {
 	var prt string = ":1234"
 	fmt.Println("Listening on port ", prt)
@@ -31,22 +36,20 @@ func main() {
 		// Handle Error
 	}
 
-	var err_c []int
+	var err_c []string
+	//err_c := make([]string, 1)
 
 	for {
 		msg, _ := bufio.NewReader(conn).ReadString('\n')
 		var leng int = length(msg)
-		//fmt.Println("Length - ", length(msg))
-		//fmt.Print(reflect.TypeOf(msg))
-		fmt.Print(msg)
-		//msg = "clo"
-		//fmt.Print(reflect.TypeOf(msg))
 		msgt := strings.TrimRight(msg, "\n")
-		var bing bool = msgt == "clo"
 
-		fmt.Println(bing)
+		//fmt.Print(msg)
 
-		if msg == "close" {
+		//var bing bool = msgt == "clo"
+		//fmt.Println(bing)
+
+		if msgt == "close" {
 			fmt.Println("Close connection")
 			conn.Close()
 		}
@@ -59,13 +62,17 @@ func main() {
 			fmt.Print("Received: ", string(msg))
 
 			newmsg := strings.ToUpper(msg)
-			conn.Write([]byte(newmsg + "\n"))
+			conn.Write([]byte(newmsg))
 
 			msg = ""
 
 		} else if leng < 9 && msg != "\n" {
 			fmt.Println("ERROR_LENGTH")
-			_ = append(err_c, 1)
+
+			err_c = err_count(err_c)
+
+			fmt.Println(len(err_c))
+			fmt.Println(err_c)
 
 			if len(err_c) > 2 {
 				conn.Close()
