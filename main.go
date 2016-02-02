@@ -4,7 +4,7 @@ import (
 	"bufio"
 	"fmt"
 	"net"
-	"os"
+//	"os"
 	//"reflect"
 	"strings"
 	"unicode/utf8"
@@ -33,6 +33,7 @@ func main() {
 	conn, err := ln.Accept()
 	if err != nil {
 		conn.Close()
+
 		// Handle Error
 	}
 
@@ -52,10 +53,8 @@ func main() {
 		if msgt == "close" {
 			fmt.Println("Close connection")
 			conn.Close()
-		}
+			msg = ""
 
-		if msg == "what" {
-			fmt.Println(string(len(err_c)))
 		}
 
 		if leng > 8 {
@@ -68,6 +67,7 @@ func main() {
 
 		} else if leng < 9 && msg != "\n" {
 			fmt.Println("ERROR_LENGTH")
+			fmt.Println(err)
 
 			err_c = err_count(err_c)
 
@@ -76,7 +76,13 @@ func main() {
 
 			if len(err_c) > 2 {
 				conn.Close()
-				os.Exit(2)
+				// Next line stops the program shitting itself.
+				conn, err = ln.Accept()
+				// Next line resets the error count
+				err_c = err_c[:0]
+
+				//Below line not needed
+				//os.Exit(2)
 			}
 
 		} else {
