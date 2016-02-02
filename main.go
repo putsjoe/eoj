@@ -67,12 +67,11 @@ func main() {
 
 		} else if leng < 9 && msg != "\n" {
 			fmt.Println("ERROR_LENGTH")
-			fmt.Println(err)
 
 			err_c = err_count(err_c)
 
-			fmt.Println(len(err_c))
-			fmt.Println(err_c)
+			//fmt.Println(len(err_c))
+			//fmt.Println(err_c)
 
 			if len(err_c) > 2 {
 				conn.Close()
