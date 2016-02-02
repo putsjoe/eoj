@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"net"
 	"os"
-	//_ "reflect"
+	//"reflect"
 	"strings"
 	"unicode/utf8"
 )
@@ -39,7 +39,10 @@ func main() {
 		//fmt.Println("Length - ", length(msg))
 		//fmt.Print(reflect.TypeOf(msg))
 		fmt.Print(msg)
-		var bing bool = msg == "close"
+		//msg = "clo"
+		//fmt.Print(reflect.TypeOf(msg))
+		msgt := strings.TrimRight(msg, "\n")
+		var bing bool = msgt == "clo"
 
 		fmt.Println(bing)
 
