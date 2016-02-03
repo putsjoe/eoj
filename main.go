@@ -15,14 +15,6 @@ func length(a string) int {
 	return utf8.RuneCountInString(a)
 }
 
-func kick(slice []string) []string {
-	conn.Close()
-	conn, err = ln.Accept()
-	slice = slice[:0]
-	return slice
-
-}
-
 func err_count(slice []string) []string {
 	slice = append(slice, "a")
 	return slice
