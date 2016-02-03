@@ -32,6 +32,10 @@ func ReturnTop(slice []string) (string, []string) {
 	return first, slice
 }
 
+func isComplex(a string) bool {
+	return true
+}
+
 func main() {
 	var lilo []string //Define main slice
 
@@ -76,15 +80,20 @@ func main() {
 			fmt.Print("Received: ", string(msg))
 
 			// Check Complexity
+			var complx bool = isComplex(msg)
 
 			// If valid add to queue
+			if complx {
+				lilo = Addto(lilo, msg)
+				fmt.Println(len(lilo))
+				fmt.Println(lilo)
+
+			} else {
+				// If invalid, return error and close
+
+			}
 
 			//err_c = err_count(err_c)
-			lilo = Addto(lilo, msg)
-
-			// If invalid, return error and close
-			fmt.Println(len(lilo))
-			fmt.Println(lilo)
 
 			if len(lilo) > 5 {
 				var reply string
