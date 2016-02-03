@@ -64,23 +64,19 @@ func main() {
 			newmsg := strings.ToUpper(msg)
 			conn.Write([]byte(newmsg))
 
-			msg = ""
-			conn.Close()
-			conn, err = ln.Accept()
-
 		} else if leng < 9 && msg != "\n" {
 			//fmt.Println(err_leng)
 			conn.Write([]byte(err_leng))
 
+			// Add to error count
 			err_c = err_count(err_c)
 
-			if len(err_c) > 2 {
+			if len(err_c) > 2 { // If third length error
 				conn.Close()
 				// Next line stops the program shitting itself.
 				conn, err = ln.Accept()
 				// Next line resets the error count
 				err_c = err_c[:0]
-
 			}
 
 		} else {
