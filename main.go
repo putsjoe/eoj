@@ -4,7 +4,7 @@ import (
 	"bufio"
 	"fmt"
 	"net"
-//	"os"
+	//	"os"
 	//"reflect"
 	"strings"
 	"unicode/utf8"
@@ -13,6 +13,14 @@ import (
 func length(a string) int {
 	a = strings.Replace(a, "\n", "", -1)
 	return utf8.RuneCountInString(a)
+}
+
+func kick(slice []string) []string {
+	conn.Close()
+	conn, err = ln.Accept()
+	slice = slice[:0]
+	return slice
+
 }
 
 func err_count(slice []string) []string {
