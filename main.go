@@ -21,6 +21,7 @@ func err_count(slice []string) []string {
 }
 
 func main() {
+	var err_leng string = "ERROR_LENGTH\n"
 	var prt string = ":1234"
 	fmt.Println("Listening on port ", prt)
 
@@ -64,9 +65,12 @@ func main() {
 			conn.Write([]byte(newmsg))
 
 			msg = ""
+			conn.Close()
+			conn, err = ln.Accept()
 
 		} else if leng < 9 && msg != "\n" {
-			fmt.Println("ERROR_LENGTH")
+			//fmt.Println(err_leng)
+			conn.Write([]byte(err_leng))
 
 			err_c = err_count(err_c)
 
