@@ -20,7 +20,21 @@ func err_count(slice []string) []string {
 	return slice
 }
 
+func Addto(slice []string, m string) []string {
+	m = strings.TrimRight(m, "\n")
+	slice = append(slice, m)
+	return slice
+}
+
+func ReturnTop(slice []string) (string, []string) {
+	var first string = slice[0]
+	slice = append(slice[:0], slice[1:]...)
+	return first, slice
+}
+
 func main() {
+	var lilo []string //Define main slice
+
 	var err_leng string = "ERROR_LENGTH\n"
 	var prt string = ":1234"
 	fmt.Println("Listening on port ", prt)
@@ -58,14 +72,33 @@ func main() {
 
 		}
 
-		if leng > 8 {
+		if leng > 16 {
 			fmt.Print("Received: ", string(msg))
 
-			newmsg := strings.ToUpper(msg)
-			conn.Write([]byte(newmsg))
+			// Check Complexity
 
-		} else if leng < 9 && msg != "\n" {
-			//fmt.Println(err_leng)
+			// If valid add to queue
+
+			//err_c = err_count(err_c)
+			lilo = Addto(lilo, msg)
+
+			// If invalid, return error and close
+			fmt.Println(len(lilo))
+			fmt.Println(lilo)
+
+			if len(lilo) > 5 {
+				var reply string
+				reply, lilo = ReturnTop(lilo)
+				conn.Write([]byte(reply + "\n"))
+			} else {
+				conn.Write([]byte("STACK_LOW\n"))
+			}
+
+			/*newmsg := strings.ToUpper(msg)
+			conn.Write([]byte(newmsg)) */
+
+		} else if leng <= 16 && msg != "\n" {
+			fmt.Println(err_leng)
 			conn.Write([]byte(err_leng))
 
 			// Add to error count
