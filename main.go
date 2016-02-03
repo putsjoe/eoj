@@ -70,9 +70,6 @@ func main() {
 
 			err_c = err_count(err_c)
 
-			//fmt.Println(len(err_c))
-			//fmt.Println(err_c)
-
 			if len(err_c) > 2 {
 				conn.Close()
 				// Next line stops the program shitting itself.
@@ -80,8 +77,6 @@ func main() {
 				// Next line resets the error count
 				err_c = err_c[:0]
 
-				//Below line not needed
-				//os.Exit(2)
 			}
 
 		} else {
