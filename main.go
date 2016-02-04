@@ -76,7 +76,7 @@ func main() {
 
 		}
 
-		if leng > 16 {
+		if leng > 12 && leng <= 28 {
 			fmt.Print("Received: ", string(msg))
 
 			// Check Complexity
@@ -106,7 +106,7 @@ func main() {
 			/*newmsg := strings.ToUpper(msg)
 			conn.Write([]byte(newmsg)) */
 
-		} else if leng <= 16 && msg != "\n" {
+		} else if leng <= 16 && msg != "\n" || leng > 28 && msg != "\n" {
 			fmt.Println(err_leng)
 			conn.Write([]byte(err_leng))
 
