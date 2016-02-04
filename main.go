@@ -32,12 +32,41 @@ func ReturnTop(slice []string) (string, []string) {
 	return first, slice
 }
 
-func isComplex(a string) bool {
-	return true
+func isComplex(a string, slice []string) bool {
+	// Check contains characters and numbers
+	/* Check characters dont appear more than three times each.
+	Use range with the string.
+	Use maybe a map (golang dict equiv) to keep track of number of times a character is used)
+
+	*/
+	// Check entry isnt already in the stack - use a variable for definition of check. Only needs to be last in side of slice.
+	fmt.Println("isComplex? - ")
+	fmt.Println(slice)
+
+	if len(slice) > 0 {
+		// Compare new entry to all old
+		var match bool = false // To see if any matched
+		for _, element := range slice {
+			if element == a {
+				match = true
+				break
+			}
+		}
+		if match {
+			return false
+		} else {
+			return true
+		}
+	} else {
+		return true
+	}
+
 }
 
 func main() {
-	var lilo []string //Define main slice
+	var lilo []string       // Define main slice
+	var clilo []string      // Define copy slice for comparing stack
+	var check_copy int = 3 // Define how many entries at the end of the slice are checked for copies
 
 	var err_leng string = "ERROR_LENGTH\n"
 	var prt string = ":1234"
@@ -52,12 +81,10 @@ func main() {
 	conn, err := ln.Accept()
 	if err != nil {
 		conn.Close()
-
 		// Handle Error
 	}
 
 	var err_c []string
-	//err_c := make([]string, 1)
 
 	for {
 		msg, _ := bufio.NewReader(conn).ReadString('\n')
@@ -79,17 +106,28 @@ func main() {
 		if leng > 12 && leng <= 28 {
 			fmt.Print("Received: ", string(msg))
 
+			// Copy the slice to a new slice that only contains the last so many entries
+			if len(lilo) < check_copy {
+				clilo = lilo
+			} else {
+				var ch_copy_amount int = len(lilo) - check_copy
+				fmt.Println(ch_copy_amount)
+				clilo = lilo[:ch_copy_amount]
+			}
+
 			// Check Complexity
-			var complx bool = isComplex(msg)
+			var complx bool = isComplex(msg, clilo)
 
 			// If valid add to queue
 			if complx {
 				lilo = Addto(lilo, msg)
-				fmt.Println(len(lilo))
-				fmt.Println(lilo)
+
+				// Debugging
+				fmt.Printf("%v -- %v \n", len(lilo), lilo)
 
 			} else {
 				// If invalid, return error and close
+				fmt.Println("Invalid Entry")
 
 			}
 
