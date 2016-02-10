@@ -40,15 +40,23 @@ func isComplex(a string, slice []string) bool {
 
 	*/
 	// Check entry isnt already in the stack - use a variable for definition of check. Only needs to be last in side of slice.
+	a = strings.TrimRight(a, "\n")
+	/*
+	fmt.Println(a)
+	fmt.Println(len(a))
+	*/
 	fmt.Println("isComplex? - ")
 	fmt.Println(slice)
 
-	if len(slice) > 0 {
+	if len(a) > 0 {
 		// Compare new entry to all old
 		var match bool = false // To see if any matched
 		for _, element := range slice {
+			//fmt.Println(element + "||")
+			//fmt.Println(a + "||")
 			if element == a {
 				match = true
+				fmt.Println("Matched")
 				break
 			}
 		}
@@ -58,7 +66,7 @@ func isComplex(a string, slice []string) bool {
 			return true
 		}
 	} else {
-		return true
+		return false 
 	}
 
 }
@@ -107,9 +115,15 @@ func main() {
 			fmt.Print("Received: ", string(msg))
 
 			// Copy the slice to a new slice that only contains the last so many entries
-			if len(lilo) < check_copy {
+			fmt.Println(len(lilo))
+			fmt.Println(check_copy)
+			fmt.Println("---")
+
+			if check_copy >= len(lilo) {
+				fmt.Println("copy lilo to clilo")
 				clilo = lilo
 			} else {
+				fmt.Println("get last of slice")
 				var ch_copy_amount int = len(lilo) - check_copy
 				fmt.Println(ch_copy_amount)
 				clilo = lilo[:ch_copy_amount]
