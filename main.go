@@ -126,7 +126,7 @@ func main() {
 				fmt.Println("get last of slice")
 				var ch_copy_amount int = len(lilo) - check_copy
 				fmt.Println(ch_copy_amount)
-				clilo = lilo[:ch_copy_amount]
+				clilo = lilo[ch_copy_amount:]
 			}
 
 			// Check Complexity
