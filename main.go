@@ -41,8 +41,8 @@ func isComplex(a string, slice []string) bool {
 	*/
 	// Check entry isnt already in the stack - use a variable for definition of check. Only needs to be last in side of slice.
 	/*
-	fmt.Println(a)
-	fmt.Println(len(a))
+		fmt.Println(a)
+		fmt.Println(len(a))
 	*/
 	fmt.Println("isComplex? - ")
 	fmt.Println(slice)
@@ -65,14 +65,14 @@ func isComplex(a string, slice []string) bool {
 			return true
 		}
 	} else {
-		return false 
+		return false
 	}
 
 }
 
 func main() {
-	var lilo []string       // Define main slice
-	var clilo []string      // Define copy slice for comparing stack
+	var lilo []string      // Define main slice
+	var clilo []string     // Define copy slice for comparing stack
 	var check_copy int = 3 // Define how many entries at the end of the slice are checked for copies
 
 	var err_leng string = "ERROR_LENGTH\n"
@@ -94,6 +94,7 @@ func main() {
 	var err_c []string
 
 	for {
+		conn.Write([]byte("eoj:: "))
 		msg, _ := bufio.NewReader(conn).ReadString('\n')
 		var leng int = length(msg)
 		msgt := strings.TrimRight(msg, "\n")
@@ -139,21 +140,22 @@ func main() {
 				// Debugging
 				fmt.Printf("%v -- %v \n", len(lilo), lilo)
 
+				if len(lilo) > 5 {
+					var reply string
+					reply, lilo = ReturnTop(lilo)
+					conn.Write([]byte(reply + "\n"))
+				} else {
+					conn.Write([]byte("STACK_LOW\n"))
+				}
+
 			} else {
 				// If invalid, return error and close
 				fmt.Println("Invalid Entry")
+				conn.Write([]byte("DUPLICATE_ERROR\n"))
 
 			}
 
 			//err_c = err_count(err_c)
-
-			if len(lilo) > 5 {
-				var reply string
-				reply, lilo = ReturnTop(lilo)
-				conn.Write([]byte(reply + "\n"))
-			} else {
-				conn.Write([]byte("STACK_LOW\n"))
-			}
 
 			/*newmsg := strings.ToUpper(msg)
 			conn.Write([]byte(newmsg)) */
