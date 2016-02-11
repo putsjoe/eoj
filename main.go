@@ -40,7 +40,6 @@ func isComplex(a string, slice []string) bool {
 
 	*/
 	// Check entry isnt already in the stack - use a variable for definition of check. Only needs to be last in side of slice.
-	a = strings.TrimRight(a, "\n")
 	/*
 	fmt.Println(a)
 	fmt.Println(len(a))
@@ -130,6 +129,7 @@ func main() {
 			}
 
 			// Check Complexity
+			msg = strings.TrimRight(msg, "\n")
 			var complx bool = isComplex(msg, clilo)
 
 			// If valid add to queue
