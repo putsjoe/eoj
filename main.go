@@ -34,11 +34,11 @@ func ReturnTop(slice []string) (string, []string) {
 
 func isComplex(a string, slice []string) bool {
 	// Check contains characters and numbers
-			/* Check characters dont appear more than three times each.
-			Use range with the string.
-			Use maybe a map (golang dict equiv) to keep track of number of times a character is used)
-			*/
-			//> Count characters
+	/* Check characters dont appear more than three times each.
+	Use range with the string.
+	Use maybe a map (golang dict equiv) to keep track of number of times a character is used)
+	*/
+	//> Count characters
 
 }
 
@@ -62,7 +62,7 @@ func isDuplicate(a string, slice []string) bool {
 		if match {
 			return false
 		} else {
-			
+
 			//return true
 		}
 	} else {
