@@ -34,18 +34,18 @@ func ReturnTop(slice []string) (string, []string) {
 
 func isComplex(a string, slice []string) bool {
 	// Check contains characters and numbers
-	/* Check characters dont appear more than three times each.
-	Use range with the string.
-	Use maybe a map (golang dict equiv) to keep track of number of times a character is used)
+			/* Check characters dont appear more than three times each.
+			Use range with the string.
+			Use maybe a map (golang dict equiv) to keep track of number of times a character is used)
+			*/
+			//> Count characters
 
-	*/
-	// Check entry isnt already in the stack - use a variable for definition of check. Only needs to be last in side of slice.
-	/*
-		fmt.Println(a)
-		fmt.Println(len(a))
-	*/
-	fmt.Println("isComplex? - ")
-	fmt.Println(slice)
+}
+
+func isDuplicate(a string, slice []string) bool {
+
+	//fmt.Println("isDuplicate? - ")
+	//fmt.Println(slice)
 
 	if len(a) > 0 {
 		// Compare new entry to all old
@@ -62,7 +62,8 @@ func isComplex(a string, slice []string) bool {
 		if match {
 			return false
 		} else {
-			return true
+			
+			//return true
 		}
 	} else {
 		return false
@@ -71,8 +72,8 @@ func isComplex(a string, slice []string) bool {
 }
 
 func main() {
-	var lilo []string      // Define main slice
-	var clilo []string     // Define copy slice for comparing stack
+	var lilo []string         // Define main slice
+	var clilo []string        // Define copy slice for comparing stack
 	var check_copy int = 3000 // Define how many entries at the end of the slice are checked for copies
 
 	var err_leng string = "ERROR_LENGTH\n"
@@ -131,7 +132,7 @@ func main() {
 
 			// Check Complexity
 			msg = strings.TrimRight(msg, "\n")
-			var complx bool = isComplex(msg, clilo)
+			var complx bool = isDuplicate(msg, clilo)
 
 			// If valid add to queue
 			if complx {
