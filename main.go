@@ -73,7 +73,7 @@ func isComplex(a string, slice []string) bool {
 func main() {
 	var lilo []string      // Define main slice
 	var clilo []string     // Define copy slice for comparing stack
-	var check_copy int = 3 // Define how many entries at the end of the slice are checked for copies
+	var check_copy int = 3000 // Define how many entries at the end of the slice are checked for copies
 
 	var err_leng string = "ERROR_LENGTH\n"
 	var prt string = ":1234"
