@@ -1,6 +1,6 @@
 #eoj
 
-A LILO stack, used for an attempt at randomness, or unpredictability.
+A FIFO stack, used for an attempt at randomness, or unpredictability.
  
 ## Plan
 
