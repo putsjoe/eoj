@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"strings"
 )
 
 func main() {
@@ -37,5 +38,14 @@ func main() {
 			fmt.Printf("\n")
 		}
 	}
+	fmt.Println(" -- -- -- ")
+
+	var abc string = "abcdefghijklmnopqrstuvwxyz"
+	var xem string = "g"
+
+	if strings.Contains(abc, xem) {
+		fmt.Println(xem + " in ABC")
+	}
+
 
 }

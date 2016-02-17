@@ -35,19 +35,30 @@ func ReturnTop(slice []string) (string, []string) {
 func isComplex(a string) bool {
 	// Create Map to count.
 	countr := make(map[rune]int)
+	var cChars string = "abcdefghijklmnopqrstuvwxyz"
+	var cFail int = 0
+
+	var cAmount int = 0
 
 	// Cycle through array
 	for _, x := range a {
 		countr[x]++
 	}
 
-	for k, v := range countr {
-		fmt.Printf("%v - %v ", string(k), v)
+	for k,v := range countr {
+		fmt.Printf("%v - %v ",string(k),v)
 		if v > 3 {
-			fmt.Printf(" - Ping\n")
-		} else {
-			fmt.Printf("\n")
+			cFail++
 		}
+		if strings.Contains(cChars, string(k)) {
+			cAmount++
+		}
+	}
+	
+	if cFail > 0 || cAmount < 4 {
+		return false
+	} else {
+		return true
 	}
 
 	// Check contains characters and numbers
@@ -56,7 +67,6 @@ func isComplex(a string) bool {
 	Use maybe a map (golang dict equiv) to keep track of number of times a character is used)
 	*/
 	//> Count characters
-	return true
 
 }
 
