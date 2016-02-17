@@ -32,7 +32,25 @@ func ReturnTop(slice []string) (string, []string) {
 	return first, slice
 }
 
-func isComplex(a string, slice []string) bool {
+func isComplex(a string) bool {
+	// Set dictionary to count.
+	countr := make(map[string]int)
+
+	// Cycle through array
+	for _, x := range a {
+		//fmt.Print(string(x) + ":")
+		cha := string(x)
+		var countb int = countr[cha]
+		countr[cha] = countb + 1
+		fmt.Println(string(countr[cha]))
+
+	}
+	fmt.Println("")
+
+	for k,v := range countr {
+		fmt.Print(string(k) + ":" + string(v) + "-")
+	}
+
 	// Check contains characters and numbers
 	/* Check characters dont appear more than three times each.
 	Use range with the string.
@@ -137,9 +155,13 @@ func main() {
 
 			// If valid add to queue
 			if dupl {
-				//var complx bool = isComplex(msg)
-				lilo = Addto(lilo, msg)
-
+				var complx bool = isComplex(msg)
+				if complx {
+					lilo = Addto(lilo, msg)
+				} else {
+					fmt.Println("Invalid Entry - COM")
+					conn.Write([]byte("ERROR_COMPLEX\n"))
+				}
 				// Debugging
 				fmt.Printf("%v -- %v \n", len(lilo), lilo)
 
@@ -153,7 +175,7 @@ func main() {
 
 			} else {
 				// If invalid, return error and close
-				fmt.Println("Invalid Entry")
+				fmt.Println("Invalid Entry - DUP")
 				conn.Write([]byte("DUPLICATE_ERROR\n"))
 
 			}
