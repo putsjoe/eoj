@@ -37,8 +37,8 @@ func isComplex(a string) bool {
 	countr := make(map[rune]int)
 	var cChars string = "abcdefghijklmnopqrstuvwxyz"
 	var cFail int = 0
-
-	var cAmount int = 0
+	var cABC int = 0
+	var cnABC int = 0
 
 	// Cycle through array
 	for _, x := range a {
@@ -46,16 +46,20 @@ func isComplex(a string) bool {
 	}
 
 	for k,v := range countr {
-		fmt.Printf("%v - %v ",string(k),v)
-		if v > 3 {
+		//fmt.Printf("%v - %v ",string(k),v)
+		if v > 5 {
 			cFail++
 		}
-		if strings.Contains(cChars, string(k)) {
-			cAmount++
+		if strings.Contains(cChars, string(k)) == false {
+			cnABC++
+			fmt.Printf("%v - Not in ABC \n",string(k))
+		} else {
+			cABC++
 		}
 	}
-	
-	if cFail > 0 || cAmount < 4 {
+	fmt.Printf("cFail - %v ; cABC - %v ; cnABC - %v ;  \n",cFail,cABC,cnABC)
+
+	if cFail > 0 || cABC < 4 || cnABC < 4 {
 		return false
 	} else {
 		return true
