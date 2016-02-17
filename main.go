@@ -33,26 +33,21 @@ func ReturnTop(slice []string) (string, []string) {
 }
 
 func isComplex(a string) bool {
-	// Set dictionary to count.
+	// Create Map to count.
 	countr := make(map[rune]int)
 
 	// Cycle through array
 	for _, x := range a {
-		//fmt.Print(string(x) + ":")
-		//cha := string(x)
-		cha := x
-		fmt.Println(string(x))
-		fmt.Println(string(countr[cha]))
-		//var countb int = countr[cha]
 		countr[x]++
-		//countr[cha] = countr + 1
-		//fmt.Println(string(countr[cha]))
-
 	}
-	fmt.Println("")
 
-	for k,v := range countr {
-		fmt.Println(string(k) + " - " + string(v))
+	for k, v := range countr {
+		fmt.Printf("%v - %v ", string(k), v)
+		if v > 3 {
+			fmt.Printf(" - Ping\n")
+		} else {
+			fmt.Printf("\n")
+		}
 	}
 
 	// Check contains characters and numbers
@@ -61,7 +56,7 @@ func isComplex(a string) bool {
 	Use maybe a map (golang dict equiv) to keep track of number of times a character is used)
 	*/
 	//> Count characters
-	return true 
+	return true
 
 }
 

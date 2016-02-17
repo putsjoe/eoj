@@ -26,17 +26,11 @@ func main() {
 
 	for _, d := range sting {
 		countr[d]++
-		/*countc := countr[d]
-		if (countc == 0) {
-			countr[d] = 1
-		} else {
-			countr[d]++
-		}*/
 	}
 
 	for k, v := range countr {
 		//fmt.Println(string(k) + " - " + string(v))
-		fmt.Printf("%v - %v ",k,v)
+		fmt.Printf("%v - %v ", k, v)
 		if v > 3 {
 			fmt.Printf("BingBong\n")
 		} else {
