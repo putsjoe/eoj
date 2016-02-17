@@ -34,21 +34,25 @@ func ReturnTop(slice []string) (string, []string) {
 
 func isComplex(a string) bool {
 	// Set dictionary to count.
-	countr := make(map[string]int)
+	countr := make(map[rune]int)
 
 	// Cycle through array
 	for _, x := range a {
 		//fmt.Print(string(x) + ":")
-		cha := string(x)
-		var countb int = countr[cha]
-		countr[cha] = countb + 1
+		//cha := string(x)
+		cha := x
+		fmt.Println(string(x))
 		fmt.Println(string(countr[cha]))
+		//var countb int = countr[cha]
+		countr[x]++
+		//countr[cha] = countr + 1
+		//fmt.Println(string(countr[cha]))
 
 	}
 	fmt.Println("")
 
 	for k,v := range countr {
-		fmt.Print(string(k) + ":" + string(v) + "-")
+		fmt.Println(string(k) + " - " + string(v))
 	}
 
 	// Check contains characters and numbers
