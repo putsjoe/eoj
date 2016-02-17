@@ -39,6 +39,7 @@ func isComplex(a string, slice []string) bool {
 	Use maybe a map (golang dict equiv) to keep track of number of times a character is used)
 	*/
 	//> Count characters
+	return true 
 
 }
 
@@ -62,7 +63,7 @@ func isDuplicate(a string, slice []string) bool {
 		if match {
 			return false
 		} else {
-
+			return true
 			//return true
 		}
 	} else {
@@ -132,10 +133,11 @@ func main() {
 
 			// Check Complexity
 			msg = strings.TrimRight(msg, "\n")
-			var complx bool = isDuplicate(msg, clilo)
+			var dupl bool = isDuplicate(msg, clilo)
 
 			// If valid add to queue
-			if complx {
+			if dupl {
+				//var complx bool = isComplex(msg)
 				lilo = Addto(lilo, msg)
 
 				// Debugging
