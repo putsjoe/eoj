@@ -40,12 +40,19 @@ func isComplex(a string) bool {
 	var cABC int = 0
 	var cnABC int = 0
 
+	/*
+		// Get length of string, then set the max recurrance of characters dependant on the length.
+		var entry_len int = length(a)
+		fmt.Printf("Entry Length - %v \n", entry_len)
+		var max_char_recur int = (entry_len / 10) * 2  // Max recur is 20% of string length.
+	*/
+
 	// Cycle through array
 	for _, x := range a {
 		countr[x]++
 	}
 
-	for k,v := range countr {
+	for k, v := range countr {
 		//fmt.Printf("%v - %v ",string(k),v)
 		if v > 5 {
 			cFail++
@@ -55,10 +62,10 @@ func isComplex(a string) bool {
 			cABC = cABC + v
 		} else {
 			cnABC = cnABC + v
-			fmt.Printf("%v - Not in ABC \n",string(k))
+			fmt.Printf("%v - Not in ABC \n", string(k))
 		}
 	}
-	fmt.Printf("cFail - %v ; cABC - %v ; cnABC - %v ;  \n",cFail,cABC,cnABC)
+	fmt.Printf("cFail - %v ; cABC - %v ; cnABC - %v ;  \n", cFail, cABC, cnABC)
 
 	if cFail > 0 || cABC < 4 || cnABC < 4 {
 		return false
@@ -69,9 +76,7 @@ func isComplex(a string) bool {
 	// Check contains characters and numbers
 	/* Check characters dont appear more than three times each.
 	Use range with the string.
-	Use maybe a map (golang dict equiv) to keep track of number of times a character is used)
 	*/
-	//> Count characters
 
 }
 
@@ -108,6 +113,8 @@ func main() {
 	var lilo []string         // Define main slice
 	var clilo []string        // Define copy slice for comparing stack
 	var check_copy int = 3000 // Define how many entries at the end of the slice are checked for copies
+	var min_len int = 16      // Define minimum length of acceptable strings
+	var max_len int = 32      // Define maximum length of acceptable strings
 
 	var err_leng string = "ERROR_LENGTH\n"
 	var prt string = ":1234"
@@ -199,7 +206,7 @@ func main() {
 			/*newmsg := strings.ToUpper(msg)
 			conn.Write([]byte(newmsg)) */
 
-		} else if leng <= 16 && msg != "\n" || leng > 28 && msg != "\n" {
+		} else if leng <= min_len && msg != "\n" || leng > max_len && msg != "\n" {
 			fmt.Println(err_leng)
 			conn.Write([]byte(err_leng))
 
