@@ -50,11 +50,12 @@ func isComplex(a string) bool {
 		if v > 5 {
 			cFail++
 		}
-		if strings.Contains(cChars, string(k)) == false {
-			cnABC++
-			fmt.Printf("%v - Not in ABC \n",string(k))
+		if strings.Contains(cChars, string(k)) {
+			//cABC++
+			cABC = cABC + v
 		} else {
-			cABC++
+			cnABC = cnABC + v
+			fmt.Printf("%v - Not in ABC \n",string(k))
 		}
 	}
 	fmt.Printf("cFail - %v ; cABC - %v ; cnABC - %v ;  \n",cFail,cABC,cnABC)
