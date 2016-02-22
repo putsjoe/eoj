@@ -32,7 +32,7 @@ func ReturnTop(slice []string) (string, []string) {
 	return first, slice
 }
 
-func isComplex(a string) bool {
+func isComplex(a string, max_r int) bool {
 	// Create Map to count.
 	countr := make(map[rune]int)
 	var cChars string = "abcdefghijklmnopqrstuvwxyz"
@@ -41,10 +41,12 @@ func isComplex(a string) bool {
 	var cnABC int = 0
 
 	/*
-		// Get length of string, then set the max recurrance of characters dependant on the length.
 		var entry_len int = length(a)
 		fmt.Printf("Entry Length - %v \n", entry_len)
-		var max_char_recur int = (entry_len / 10) * 2  // Max recur is 20% of string length.
+	
+	// Check contains characters and numbers
+	// Check characters dont appear more than three times each.
+	Use range with the string.
 	*/
 
 	// Cycle through array
@@ -54,7 +56,7 @@ func isComplex(a string) bool {
 
 	for k, v := range countr {
 		//fmt.Printf("%v - %v ",string(k),v)
-		if v > 5 {
+		if v > max_r {
 			cFail++
 		}
 		if strings.Contains(cChars, string(k)) {
@@ -72,12 +74,6 @@ func isComplex(a string) bool {
 	} else {
 		return true
 	}
-
-	// Check contains characters and numbers
-	/* Check characters dont appear more than three times each.
-	Use range with the string.
-	*/
-
 }
 
 func isDuplicate(a string, slice []string) bool {
@@ -115,6 +111,7 @@ func main() {
 	var check_copy int = 3000 // Define how many entries at the end of the slice are checked for copies
 	var min_len int = 16      // Define minimum length of acceptable strings
 	var max_len int = 32      // Define maximum length of acceptable strings
+	var max_recur = 5 // Define maximum reoccurance of character
 
 	var err_leng string = "ERROR_LENGTH\n"
 	var prt string = ":1234"
@@ -176,7 +173,7 @@ func main() {
 
 			// If valid add to queue
 			if dupl {
-				var complx bool = isComplex(msg)
+				var complx bool = isComplex(msg,max_recur) 
 				if complx {
 					lilo = Addto(lilo, msg)
 				} else {
