@@ -64,10 +64,10 @@ func isComplex(a string, max_r int) bool {
 			cABC = cABC + v
 		} else {
 			cnABC = cnABC + v
-			fmt.Printf("%v - Not in ABC \n", string(k))
+			//fmt.Printf("%v - Not in ABC \n", string(k))
 		}
 	}
-	fmt.Printf("cFail - %v ; cABC - %v ; cnABC - %v ;  \n", cFail, cABC, cnABC)
+	//fmt.Printf("cFail - %v ; cABC - %v ; cnABC - %v ;  \n", cFail, cABC, cnABC)
 
 	if cFail > 0 || cABC < 4 || cnABC < 4 {
 		return false
