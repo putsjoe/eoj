@@ -5,7 +5,7 @@ import (
 	"strings"
 )
 
-func main() {
+func tst() {
 	var a []string
 	a = append(a, "a")
 	a = append(a, "b")
