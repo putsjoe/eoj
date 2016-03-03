@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"net"
 	"crypto/rand"
+	"time"
 )
 
 func send_data(a string, port string) {
@@ -39,6 +40,11 @@ func rand_str(str_size int) string {
 
 func main() {
 	var port string = ":1234"
-	send_data(rand_str(16), port)
+
+	for {
+		send_data(rand_str(16), port)
+		time.Sleep(5000 * time.Millisecond)
+		fmt.Println("")
+	}
 
 }

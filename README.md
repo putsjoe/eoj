@@ -2,6 +2,16 @@
 
 A FIFO stack, used for an attempt at randomness, or unpredictability.
  
+## Todo
+
+  - Implement a producer with a seed -    rand.Seed(time.Now().UTC().
+  - Tests for producer.
+  - In main, stop the LENGTH_ERROR for empty string, just display dis
+  - Pick up arguments in producer
+  - Parse in a config file for main, which ultimately can configure different producers and main.go.
+
+
+
 ## Plan
 
 - Create the main script (main.go), which takes in strings on a certain port, after the stack is full enough, start returning the first string in the array/slice. 
