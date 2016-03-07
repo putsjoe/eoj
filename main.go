@@ -41,12 +41,12 @@ func isComplex(a string, max_r int) bool {
 	var cnABC int = 0
 
 	/*
-		var entry_len int = length(a)
-		fmt.Printf("Entry Length - %v \n", entry_len)
-	
-	// Check contains characters and numbers
-	// Check characters dont appear more than three times each.
-	Use range with the string.
+			var entry_len int = length(a)
+			fmt.Printf("Entry Length - %v \n", entry_len)
+
+		// Check contains characters and numbers
+		// Check characters dont appear more than three times each.
+		Use range with the string.
 	*/
 
 	// Cycle through array
@@ -111,10 +111,14 @@ func main() {
 	var check_copy int = 3000 // Define how many entries at the end of the slice are checked for copies
 	var min_len int = 16      // Define minimum length of acceptable strings
 	var max_len int = 32      // Define maximum length of acceptable strings
-	var max_recur = 5 // Define maximum reoccurance of character
+	var max_recur = 5         // Define maximum reoccurance of character
 
 	var err_leng string = "ERROR_LENGTH\n"
+	//var err_empty string = "ERROR_EMPTY"
 	var prt string = ":1234"
+	var err_c []string // Define error count
+	var emp_c int = 0  // Define empty count
+
 	fmt.Println("Listening on port ", prt)
 
 	ln, err := net.Listen("tcp", prt)
@@ -128,8 +132,6 @@ func main() {
 		conn.Close()
 		// Handle Error
 	}
-
-	var err_c []string
 
 	for {
 		conn.Write([]byte("eoj:: "))
@@ -146,10 +148,12 @@ func main() {
 			fmt.Println("Close connection")
 			conn.Close()
 			msg = ""
+			emp_c = 0
 
 		}
 
 		if leng > 12 && leng <= 28 {
+			emp_c = 0
 			fmt.Print("Received: ", string(msg))
 
 			// Copy the slice to a new slice that only contains the last so many entries
@@ -173,7 +177,7 @@ func main() {
 
 			// If valid add to queue
 			if dupl {
-				var complx bool = isComplex(msg,max_recur) 
+				var complx bool = isComplex(msg, max_recur)
 				if complx {
 					lilo = Addto(lilo, msg)
 				} else {
@@ -198,12 +202,21 @@ func main() {
 
 			}
 
-			//err_c = err_count(err_c)
+		} else if leng == 0 {
+			fmt.Print("*")
+			//	conn.Write([]byte(err_empty+"\n"))
+			emp_c = emp_c + 1
 
-			/*newmsg := strings.ToUpper(msg)
-			conn.Write([]byte(newmsg)) */
+			if emp_c == 3 {
+				fmt.Println("\nToo many empty - Disconnecting Session")
+				//conn.Write([]byte(err_empty+"\n"))
+				conn.Close()
+				conn, err = ln.Accept()
+				emp_c = 0
+			}
 
 		} else if leng <= min_len && msg != "\n" || leng > max_len && msg != "\n" {
+			emp_c = 0
 			fmt.Println(err_leng)
 			conn.Write([]byte(err_leng))
 
@@ -217,9 +230,8 @@ func main() {
 				// Next line resets the error count
 				err_c = err_c[:0]
 			}
-
 		} else {
-			fmt.Println("ERROR_EMPTY")
+			fmt.Println("ERROR_UNKNOWN")
 		}
 	}
 
